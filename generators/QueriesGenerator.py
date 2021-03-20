@@ -155,7 +155,7 @@ def insert_ipts(ipts = {}, wards = {}, beds = {}):
     ipts_value_list = []
 
     for ipt in ipts:
-        ward_id = random.choice(wards.keys())
+        ward_id = random.choice(list(wards.keys()))
         beds_in_ward = [bed_id for bed_id, bed_data in beds if bed_data["ward"] == ward_id]
         bed_id = random.choice(beds_in_ward)
 
@@ -193,3 +193,21 @@ def insert_appointments(appointments = {}):
         )
     
     queries.append(format_queries(INSERT_APPOINTMENTS_TEMPLATE, appointments_value_list))
+
+
+
+INSERT_CLINICS_TEMPLATE = """INSERT INTO clinic VALUES
+    {};"""
+
+def insert_clinics(clinics = {}):
+    clinics_value_list = []
+
+    for clinic_id, clinic_data in clinics.items():
+        clinics_value_list.append(
+            '("{}", "{}")'.format(
+                clinic_id,
+                clinic_data["name"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_CLINICS_TEMPLATE, clinics_value_list))
