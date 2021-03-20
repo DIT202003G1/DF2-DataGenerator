@@ -224,6 +224,13 @@ class CommonSources:
 		"Hospital Sungai Buloh",
 		"Hospital Tanjung Karang",
 	]
+	blocks = [
+		"Block North",
+		"Block East",
+		"Block South",
+		"Block West",
+		"Central Building"
+	]
 	institute = [
 		"Universiti Malaya (UM)",
 		"Universiti Sains Malaysia (USM)",
@@ -702,3 +709,72 @@ def generateTreatmentDrug(ipt, opt):
 				break
 	return data
 
+def generateClinics():
+	data = {}
+
+	for clinic in s.clinics:
+		clinic_id = s.generateID(prefix="CLN")
+		clinic_name = clinic
+		data[clinic_id] = {
+			"name": clinic_name
+		}
+	
+	return data
+
+def generateWards(n = 10, clinics = {}, staffs = {}):
+	data = {}
+
+	clinics_values = list(clinics.values())
+	
+	clinic_index = 0
+	for _ in range(n):
+		clinic_data = clinics_values[clinic_index]
+
+		ward_id = s.generateID(prefix="WAD")
+		ward_ext = s.generateID(length=4)
+		ward_name = clinic_data["name"]
+		ward_location = random.choice(s.blocks)
+		
+		def get_new_random_staff():
+			return random.choice(list(staffs.items()))
+		staff_id, staff_data = get_new_random_staff()
+		while staff_data["positionType"] != "Nurse":
+			staff_id, staff_data = get_new_random_staff()
+
+		ward_nurse = staff_id
+
+		data[ward_id] = {
+			"ext": ward_ext,
+			"name": ward_name,
+			"location": ward_location,
+			"nurse": ward_nurse
+		}
+
+		clinic_index += 1
+		if clinic_index == len(clinics):
+			clinic_index = 0
+	
+	return data
+
+def generateBeds(n = 240, wards = {}):
+	data = {}
+
+	wards_ids = list(wards.keys())
+
+	ward_index = 0
+	for _ in range(n):
+		ward_id = wards_ids[ward_index]
+
+		bed_id = s.generateID(prefix="BED")
+		bed_type = ""
+		bed_ward = ward_id
+		data[bed_id] = {
+			"type": bed_type,
+			"ward": bed_ward
+		}
+
+		ward_index += 1
+		if ward_index == len(wards):
+			ward_index = 0
+
+	return data
