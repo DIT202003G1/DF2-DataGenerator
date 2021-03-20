@@ -909,4 +909,3 @@ def generateSupplySuppliers():
 		supplier_index += 1
 		supplier_key = list(suppliers.keys())[supplier_index]
 	return suppliers
-print(generateSupplySuppliers())
