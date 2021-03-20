@@ -153,7 +153,7 @@ def insert_supplies(suppliers,staffs):
                 )
             )
             drugs_value_list.append(
-                "{},{},{}".format(
+                '"{}", "{}", "{}"'.format(
                     drug[0],
                     random.choice(["Tablet","Liquid Ingestion","Liquid Injection","Topical"]),
                     drug[2],
