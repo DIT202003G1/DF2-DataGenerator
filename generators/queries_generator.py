@@ -14,7 +14,10 @@ def format_date(date):
     return "-".join(map(str, date))
 
 def format_time(time):
-    return ":".join(map(str, time))
+    new_time = []
+    for i in map(str, time):
+        new_time.append("0"*(2 - len(i)) + i)
+    return ":".join(new_time)
 
 def format_telephone(telephone):
     return f'"{telephone}"' if telephone else "null"
