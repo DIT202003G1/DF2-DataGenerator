@@ -1,0 +1,26 @@
+Staff
+----------------
+	SID, first_name, last_name, address, telephone, birthdate, gender, NIN, position, salary_scale, qualification_type, qualification_institute, qualification_date, exp_organization, exp_position, exp_start_date, exp_time
+
+Patient
+----------------
+	pid, first_name, last_name, address, telephone, birthdate, gender, register_date, ntk_index, ntk_first_name, ntk_last_name, ntk_relationship, ntk_telephone, ntk_address
+
+Appointment
+----------------
+	appointment_id, consultant, date, room_id, time
+
+In-Patient
+----------------
+	pid, wait_date, in_date, out_date, exp_out_date, ward_required, bed_id, bed_type, ward_id, ward_name, ward_location
+
+
+Out-Paitent
+----------------
+	pid, clinic_id, staff, date, time, reason
+
+
+Treatment & drugs
+----------------
+	pid, staff, treatment_id, medication_id (supply_id), medication_name, medication_description, units_per_day, medication_method, start_date, finish_date, supply_stock, reorder_level, cost, dosage, supplier_id, supplier_name, supplier_address, supplier_fax, supplier_telephone.
+
