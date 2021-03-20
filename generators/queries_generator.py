@@ -82,11 +82,15 @@ INSERT_SHORT_TERM_STAFFS_TEMPLATE = """INSERT INTO staff_short_term VALUES
 INSERT_LONG_TERM_STAFFS_TEMPLATE = """INSERT INTO staff_long_term VALUES
     {};"""
 
+INSERT_CERT_STAFFS_TEMPLATE = """INSERT INTO cert_staff VALUES
+    {};"""
+
 def insert_staffs(staffs):
     staffs_value_list = []
     working_experiences_value_list = []
     short_term_staffs_value_list = []
     long_term_staffs_value_list = []
+    cert_staffs_value_list = []
 
     for staff_id, staff_data in staffs.items():
         while True:
@@ -142,11 +146,21 @@ def insert_staffs(staffs):
                     format_date(staff_data["contractStart"])
                 )
             )
-    
+
+        cert_staffs_value_list.append(
+            '("{}", "{}", "{}", "{}")'.format(
+                staff_id,
+                format_date(staff_data["qualification_date"]),
+                staff_data["qualification_institute"],
+                staff_data["qualification_type"]
+            )
+        )
+
     queries.append(format_queries(INSERT_STAFFS_TEMPLATE, staffs_value_list))
     queries.append(format_queries(INSERT_WORKING_EXP_TEMPLATE, working_experiences_value_list))
     queries.append(format_queries(INSERT_SHORT_TERM_STAFFS_TEMPLATE, short_term_staffs_value_list))
     queries.append(format_queries(INSERT_LONG_TERM_STAFFS_TEMPLATE, long_term_staffs_value_list))
+    queries.append(format_queries(INSERT_CERT_STAFFS_TEMPLATE, cert_staffs_value_list))
 
 
 
