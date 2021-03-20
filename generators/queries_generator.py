@@ -1,4 +1,5 @@
 import random
+from generators import dummy_generator
 
 queries = []
 
@@ -67,6 +68,97 @@ def insert_patients(patients):
     
     queries.append(format_queries(INSERT_PATIENTS_TEMPLATE, patients_value_list))
     queries.append(format_queries(INSERT_PATIENT_NTK_TEMPLATE, patient_ntks_value_list))
+
+
+
+INSERT_SUPPLIERS_TEMPLATE = """INSERT INTO supppliers VALUES
+    {};"""
+
+INSERT_SUPPLIES_TEMPLATE = """INSERT INTO supply VALUES
+    {};"""
+
+INSERT_DRUGS_TEMPLATE = """INSERT INTO supply_drug VALUES
+    {};"""
+
+INSERT_EQUIPMENTS_TEMPLATE = """INSERT INTO supply_equipment VALUES
+    {};"""
+
+def insert_suppliers(suppliers):
+    suppliers_value_list = []
+
+    for id, supplier_data in suppliers.items():
+        suppliers_value_list.append(
+            '({},{},{},{},{})'.format(
+                id,
+                supplier_data["name"],
+                supplier_data["address"],
+                supplier_data["telephone"],
+                supplier_data["fax"],
+            )
+        )
+    queries.append(format_queries(INSERT_SUPPLIERS_TEMPLATE, suppliers_value_list))
+
+def insert_supplies(suppliers,staffs):
+    supplies_value_list = []
+    drugs_value_list = []
+    equipments_value_list = []
+
+    for supplier_id, supplier_data in suppliers.items():
+        for equipment in supplier_data["equipment"]:
+            """
+               sply_id CHAR(8),
+                eqm_size VARCHAR(128),
+                eqm_type VARCHAR(128),
+                PRIMARY KEY (sply_id)
+            """
+            while True:
+                staff_director, staff_director_data = random_dict_element(staffs)
+                if staff_director_data["position"] == "Medical Director":
+                    break
+            supplies_value_list.append(
+                '("{}","{}",{},{},"{}","{}","{}")'.format(
+                    equipment[0],
+                    equipment[2],
+                    random.randint(100,500),
+                    random.randint(1,5) * 100,
+                    f"{random.randint(1,3)}{random.randint(0,9)}{random.randint(0,9)}.{random.randint(0,9)}{random.randint(0,9)}",
+                    supplier_id,
+                    staff_director,
+                )
+            )
+            equipments_value_list.append(
+                "{},{},{}".format(
+                    equipment[0],
+                    equipment[1],
+                    "First-aid",
+                )
+            )
+        for drug in supplier_data["drugs"]:
+            while True:
+                staff_director, staff_director_data = random_dict_element(staffs)
+                if staff_director_data["position"] == "Medical Director":
+                    break
+            supplies_value_list.append(
+                '("{}","{}",{},{},"{}","{}","{}")'.format(
+                    drug[0],
+                    drug[1],
+                    random.randint(1000,5000),
+                    random.randint(1,5) * 1000,
+                    f"{random.randint(1,3)}{random.randint(0,9)}{random.randint(0,9)}.{random.randint(0,9)}{random.randint(0,9)}",
+                    supplier_id,
+                    staff_director,
+                )
+            )
+            drugs_value_list.append(
+                "{},{},{}".format(
+                    drug[0],
+                    random.choice(["Tablet","Liquid Ingestion","Liquid Injection","Topical"]),
+                    drug[2],
+                )
+            )
+    queries.append(format_queries(INSERT_SUPPLIES_TEMPLATE, supplies_value_list))
+    queries.append(format_queries(INSERT_DRUGS_TEMPLATE, drugs_value_list))
+    queries.append(format_queries(INSERT_EQUIPMENTS_TEMPLATE, equipments_value_list))
 
 
 
