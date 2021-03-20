@@ -12,12 +12,11 @@ CREATE TABLE cert_staff (
 
 CREATE TABLE working_exp (
     sf_id CHAR(8),
-    wexp_index INT(4),
+    wexp_start_date DATE,
     wexp_oragnization VARCHAR(128),
     wexp_position VARCHAR(128),
-    wexp_start_date DATE,
     wexp_time INT(5),
-    PRIMARY KEY (sf_id, wexp_index)
+    PRIMARY KEY (sf_id, wexp_start_date)
 );
 
 CREATE TABLE staff (
