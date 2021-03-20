@@ -294,6 +294,13 @@ class CommonSources:
 		"Universiti Sultan Azlan Shan",
 		"Universiti Islam Antarabangsa Sultan Abdul Halim Mu’adzam Shah",
 	]
+	drugs = [
+		["DRG00001","a",20],
+		["DRG00002","b",25],
+		["DRG00003","c",30],
+		["DRG00004","d",35],
+		["DRG00005","e",40]
+	]
 	def generateGenderedName(self,gender="",lastName=""):
 		if not gender:
 			gender = random.choice(["male","female"])
@@ -660,7 +667,21 @@ def generateOPTIPTAppointment(patients, staffs):
 			date = s.generateDate(date[0],2020)
 	return ipt,opt,appointment
 
-a = generatePatient()
-b = generateStaff()
-c = generateOPTIPTAppointment(a,b)
-# print(json.dumps(c[0], indent=4))
+def generateTreatmentDrug(ipt, opt, staff):
+	data = {}
+	for i in ipt:
+		for j in range(3):
+			ptr_id = s.generateID(prefix="PTR")
+			ptr_unit = random.randint(1,6)
+			ptr_start_date = ipt["inDate"]
+			ptr_duration = ipt["expectedDuration"]
+			ptr_drug, _, _ = random.choice(s.drugs)
+			if j == 0:
+				data[i["PID"]] = {
+					"unitsPerDay":ptr_unit,
+					"start":ptr_start_date,
+					"duration":ptr_duration,
+					"drug":ptr_drug,
+				}
+			elif random.randint(0,1):
+				break
