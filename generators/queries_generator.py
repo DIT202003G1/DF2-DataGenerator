@@ -74,7 +74,7 @@ def insert_patients(patients):
 
 
 
-INSERT_SUPPLIERS_TEMPLATE = """INSERT INTO supppliers VALUES
+INSERT_SUPPLIERS_TEMPLATE = """INSERT INTO suppliers VALUES
     {};"""
 
 INSERT_SUPPLIES_TEMPLATE = """INSERT INTO supply VALUES
