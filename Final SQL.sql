@@ -181,7 +181,6 @@ ALTER TABLE staff_short_term
 ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
 
 ALTER TABLE pt_ntk
-ADD FOREIGN KEY (pt_id) REFERENCES patient(pt_id),
 ADD FOREIGN KEY (pt_id) REFERENCES patient(pt_id);
 
 ALTER TABLE out_patient
@@ -193,7 +192,7 @@ ADD FOREIGN KEY (pt_id) REFERENCES patient(pt_id);
 
 ALTER TABLE patient_appointment
 ADD FOREIGN KEY (pa_patient) REFERENCES patient(pt_id),
-ADD FOREIGN KEY (pa_consultant) REFERENCES out_patient(opt_clinic);
+ADD FOREIGN KEY (pa_consultant) REFERENCES staff(sf_id);
 
 ALTER TABLE patient_treatment
 ADD FOREIGN KEY (ptr_drug) REFERENCES supply_drug(sply_id),
