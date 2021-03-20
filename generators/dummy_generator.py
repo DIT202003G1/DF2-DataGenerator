@@ -801,40 +801,45 @@ def generateOPTIPTAppointment(patients, staffs):
             date = s.generateDate(date[0],2020)
     return ipt,opt,appointment
 
-def generateTreatmentDrug(ipt, opt):
+def generateTreatmentDrug(ipts, opts):
     data = {}
-    for i in ipt:
+    
+    for ipt_id, ipt_data in ipts.items():
+        ptr_id = s.generateID(prefix="PTR")
+        ptr_unit = random.randint(1,6)
+        ptr_drug, _, _ = random.choice(s.drugs)
         for j in range(3):
-            ptr_id = s.generateID(prefix="PTR")
-            ptr_unit = random.randint(1,6)
-            ptr_start_date = i["inDate"]
-            ptr_duration = i["expectedDuration"]
-            ptr_drug, _, _ = random.choice(s.drugs)
+            ptr_start_date = ipt_data["inDate"]
+            ptr_duration = ipt_data["expectedDuration"]
             if j == 0:
-                data[i["PID"]] = {
+                data[ptr_id] = {
                     "unitsPerDay":ptr_unit,
                     "start":ptr_start_date,
                     "duration":ptr_duration,
                     "drug":ptr_drug,
+                    "patient":ipt_id
                 }
             elif random.randint(0,1):
                 break
-    for i in opt:
+
+    for opt_id, opt_data in opts.items():
+        ptr_id = s.generateID(prefix="PTR")
+        ptr_unit = random.randint(1,6)
+        ptr_drug, _, _ = random.choice(s.drugs)
         for j in range(3):
-            ptr_id = s.generateID(prefix="PTR")
-            ptr_unit = random.randint(1,6)
-            ptr_start_date = i["date"]
+            ptr_start_date = opt_data["date"]
             ptr_duration = random.randint(5,14)
-            ptr_drug, _, _ = random.choice(s.drugs)
             if j == 0:
-                data[i["PID"]] = {
+                data[ptr_id] = {
                     "unitsPerDay":ptr_unit,
                     "start":ptr_start_date,
                     "duration":ptr_duration,
                     "drug":ptr_drug,
+                    "patient":opt_id
                 }
             elif random.randint(0,1):
                 break
+
     return data
 
 def generateClinics():
