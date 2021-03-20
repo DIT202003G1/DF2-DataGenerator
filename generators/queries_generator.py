@@ -76,18 +76,27 @@ INSERT_STAFFS_TEMPLATE = """INSERT INTO staff VALUES
 INSERT_WORKING_EXP_TEMPLATE = """INSERT INTO working_exp VALUES
     {};"""
 
+INSERT_SHORT_TERM_STAFFS_TEMPLATE = """INSERT INTO staff_short_term VALUES
+    {};"""
+
+INSERT_LONG_TERM_STAFFS_TEMPLATE = """INSERT INTO staff_long_term VALUES
+    {};"""
+
 def insert_staffs(staffs):
     staffs_value_list = []
     working_experiences_value_list = []
+    short_term_staffs_value_list = []
+    long_term_staffs_value_list = []
 
-    for id, staff_data in staffs.items():
+    for staff_id, staff_data in staffs.items():
         while True:
             staff_manager, staff_manager_data = random_dict_element(staffs)
             if staff_manager_data["position"] == "Personnel Officer":
                 break
+        
         staffs_value_list.append(
             '("{}", "{}", "{}", "{}", {}, "{}", "{}", "{}", "{}", "{}", "{}", {})'.format(
-                id,
+                staff_id,
                 staff_data["firstName"],
                 staff_data["lastName"],
                 staff_data["address"],
@@ -110,16 +119,34 @@ def insert_staffs(staffs):
 
             working_experiences_value_list.append(
                 '("{}", "{}", "{}", "{}", "{}")'.format(
-                    id,
+                    staff_id,
                     format_date(start),
                     org,
                     pos,
                     duration
                 )
             )
+
+        if staff_data["contract"] == "short":
+            short_term_staffs_value_list.append(
+                '("{}", "{}", "{}")'.format(
+                    staff_id,
+                    format_date(staff_data["contractStart"]),
+                    staff_data["duration"]
+                )
+            )
+        elif staff_data["contract"] == "long":
+            long_term_staffs_value_list.append(
+                '("{}", "{}")'.format(
+                    staff_id,
+                    format_date(staff_data["contractStart"])
+                )
+            )
     
     queries.append(format_queries(INSERT_STAFFS_TEMPLATE, staffs_value_list))
     queries.append(format_queries(INSERT_WORKING_EXP_TEMPLATE, working_experiences_value_list))
+    queries.append(format_queries(INSERT_SHORT_TERM_STAFFS_TEMPLATE, short_term_staffs_value_list))
+    queries.append(format_queries(INSERT_LONG_TERM_STAFFS_TEMPLATE, long_term_staffs_value_list))
 
 
 
