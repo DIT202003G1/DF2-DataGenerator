@@ -172,7 +172,7 @@ ALTER TABLE working_exp
 ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
 
 ALTER TABLE staff
-ADD FOREIGN KEY (sf_manager) REFERENCES staff_personal_officer(sf_id);
+ADD FOREIGN KEY (sf_manager) REFERENCES staff(sf_id);
 
 ALTER TABLE staff_long_term
 ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
@@ -201,7 +201,7 @@ ADD FOREIGN KEY (ptr_patient) REFERENCES patient(pt_id);
 
 ALTER TABLE supply
 ADD FOREIGN KEY (sply_splr) REFERENCES suppliers(splr_id),
-ADD FOREIGN KEY (sply_director) REFERENCES staff_medical_director(sf_id);
+ADD FOREIGN KEY (sply_director) REFERENCES staff(sf_id);
 
 ALTER TABLE supply_equipment
 ADD FOREIGN KEY (sply_id) REFERENCES supply(sply_id);
@@ -210,7 +210,7 @@ ALTER TABLE supply_drug
 ADD FOREIGN KEY (sply_id) REFERENCES supply(sply_id);
 
 ALTER TABLE ward
-ADD FOREIGN KEY (ward_nurse) REFERENCES staff_nurse(sf_id);
+ADD FOREIGN KEY (ward_nurse) REFERENCES staff(sf_id);
 
 ALTER TABLE bed
 ADD FOREIGN KEY (bed_ward) REFERENCES ward(ward_id);
