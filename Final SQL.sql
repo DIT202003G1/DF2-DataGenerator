@@ -188,7 +188,7 @@ ALTER TABLE out_patient
 ADD FOREIGN KEY (opt_clinic) REFERENCES clinic(clinic_id);
 
 ALTER TABLE in_patient
-ADD FOREIGN KEY (ipt_bed) REFERENCES bed(bed_id);
+ADD FOREIGN KEY (ipt_bed) REFERENCES bed(bed_id),
 ADD FOREIGN KEY (pt_id) REFERENCES patient(pt_id);
 
 ALTER TABLE patient_appointment
