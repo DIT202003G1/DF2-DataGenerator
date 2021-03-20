@@ -196,7 +196,7 @@ INSERT_CLINICS_TEMPLATE = """INSERT INTO clinic VALUES
 def insert_clinics(clinics = {}):
     clinics_value_list = []
 
-    for clinic_id, clinic_data in clinics:
+    for clinic_id, clinic_data in clinics.items():
         clinics_value_list.append(
             '("{}", "{}")'.format(
                 clinic_id,
@@ -204,4 +204,4 @@ def insert_clinics(clinics = {}):
             )
         )
     
-    queries.append(format_queries(INSERT_CLINICS_TEMPLATE, insert_clinics))
+    queries.append(format_queries(INSERT_CLINICS_TEMPLATE, clinics_value_list))
