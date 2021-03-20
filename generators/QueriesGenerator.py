@@ -8,6 +8,9 @@ def get_queries():
 def format_date(date):
     return "-".join(map(str, date))
 
+def format_time(time):
+    return ":".join(map(str, time))
+
 def format_telephone(telephone):
     return f'"{telephone}"' if telephone else "null"
 
@@ -117,11 +120,23 @@ INSERT_OPTS_TEMPLATE = """INSERT INTO out_patient VALUES
 
 opt_index = 0
 def insert_opts(opts = []):
+    global opt_index
+    opts_value_list = []
+
     for opt in opts:
-        opt["IPD"]
+        opts_value_list.append(
+            '("{}", "{}", "{}", "{}", "{}")'.format(
+                opt["PID"],
+                opt_index,
+                format_date(opt["date"]),
+                opt["reason"],
+                opt["clinic"]
+            )
+        )
         
-        global opt_index
         opt_index += 1
+    
+    queries.append(format_queries(INSERT_OPTS_TEMPLATE, opts_value_list))
 
 
 
@@ -129,9 +144,40 @@ INSERT_IPTS_TEMPLATE = """INSERT INTO in_patient VALUES
     {};"""
 
 def insert_ipts(ipts = []):
-    pass
+    ipts_value_list = []
+
+    for ipt in ipts:
+        ipts_value_list.append(
+            '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
+                ipt["PID"],
+                format_date(ipt["waitDate"]),
+                format_date(ipt["inDate"]),
+                ipt["expectedDuration"],
+                format_date(ipt["outDate"]),
+                --- TODO ---
+            )
+        )
+    
+    queries.append(format_queries(INSERT_IPTS_TEMPLATE, ipts_value_list))
 
 
+
+INSERT_APPOINTMENTS_TEMPLATE = """INSERT INTO patient_appointment VALUES
+    {};"""
 
 def insert_appointments(appointments = []):
-    pass
+    appointments_value_list = []
+
+    for appointment in appointments:
+        appointments_value_list.append(
+            '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
+                --- TODO ---,
+                appointment["date"],
+                appointment["room"],
+                format_time(appointment["time"]),
+                appointment["PID"],
+                appointment["SID"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_APPOINTMENTS_TEMPLATE, appointments_value_list))
