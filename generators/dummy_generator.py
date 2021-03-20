@@ -899,7 +899,7 @@ def generateBeds(wards, n = 240):
         ward_id = wards_ids[ward_index]
 
         bed_id = s.generateID(prefix="BED")
-        bed_type = ""
+        bed_type = random.choice(["large", "normal"])
         bed_ward = ward_id
         data[bed_id] = {
             "type": bed_type,
