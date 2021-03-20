@@ -174,15 +174,6 @@ ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
 ALTER TABLE staff
 ADD FOREIGN KEY (sf_manager) REFERENCES staff_personal_officer(sf_id);
 
-ALTER TABLE staff_personal_officer
-ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
-
-ALTER TABLE staff_nurse
-ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
-
-ALTER TABLE staff_medical_director
-ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
-
 ALTER TABLE staff_long_term
 ADD FOREIGN KEY (sf_id) REFERENCES staff(sf_id);
 
