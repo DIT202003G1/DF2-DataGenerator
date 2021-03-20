@@ -1,12 +1,10 @@
 from generators import DummyGenerator, QueriesGenerator
+from generators.DummyGenerator import generateOPTIPTAppointment,generatePatient,generateStaff
 
 def main():
-    QueriesGenerator.insert_patients(DummyGenerator.generatePatient())
-
-    queries = QueriesGenerator.get_queries()
-    with open("queries.sql", "w") as queries_file:
-        for query in queries:
-            queries_file.write(query + "\n")
+    a = generateStaff()
+    b = generatePatient()
+    c = generateOPTIPTAppointment(b,a)
 
 if __name__ == "__main__":
     main()
