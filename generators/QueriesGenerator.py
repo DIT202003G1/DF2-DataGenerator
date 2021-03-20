@@ -143,10 +143,14 @@ def insert_opts(opts = []):
 INSERT_IPTS_TEMPLATE = """INSERT INTO in_patient VALUES
     {};"""
 
-def insert_ipts(ipts = []):
+def insert_ipts(ipts = {}, wards = {}, beds = {}):
     ipts_value_list = []
 
     for ipt in ipts:
+        ward_id = random.choice(wards.keys())
+        beds_in_ward = [bed_id for bed_id, bed_data in beds if bed_data["ward"] == ward_id]
+        bed_id = random.choice(beds_in_ward)
+
         ipts_value_list.append(
             '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
                 ipt["PID"],
@@ -154,7 +158,7 @@ def insert_ipts(ipts = []):
                 format_date(ipt["inDate"]),
                 ipt["expectedDuration"],
                 format_date(ipt["outDate"]),
-                --- TODO ---
+                bed_id
             )
         )
     
@@ -165,18 +169,18 @@ def insert_ipts(ipts = []):
 INSERT_APPOINTMENTS_TEMPLATE = """INSERT INTO patient_appointment VALUES
     {};"""
 
-def insert_appointments(appointments = []):
+def insert_appointments(appointments = {}):
     appointments_value_list = []
 
-    for appointment in appointments:
+    for appointment_id, appointment_date in appointments:
         appointments_value_list.append(
             '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
-                --- TODO ---,
-                appointment["date"],
-                appointment["room"],
-                format_time(appointment["time"]),
-                appointment["PID"],
-                appointment["SID"]
+                appointment_id,
+                appointment_date["date"],
+                appointment_date["room"],
+                format_time(appointment_date["time"]),
+                appointment_date["PID"],
+                appointment_date["SID"]
             )
         )
     
