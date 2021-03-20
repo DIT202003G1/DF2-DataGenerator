@@ -1,3 +1,5 @@
+import random
+
 queries = []
 
 def get_queries():
@@ -119,7 +121,7 @@ INSERT_OPTS_TEMPLATE = """INSERT INTO out_patient VALUES
     {};"""
 
 opt_index = 0
-def insert_opts(opts = []):
+def insert_opts(opts = {}):
     global opt_index
     opts_value_list = []
 
