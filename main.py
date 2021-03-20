@@ -12,7 +12,7 @@ def main():
     clinics = dummy_generator.generateClinics()
     wards = dummy_generator.generateWards(clinics, staffs)
     beds = dummy_generator.generateBeds(wards)
-    ipts, opts, appointments = dummy_generator.generateOPTIPTAppointment(patients, staffs)
+    ipts, opts, appointments = dummy_generator.generateOPTIPTAppointment(patients, staffs, clinics)
     treatments = dummy_generator.generateTreatmentDrug(ipts, opts)
 
     queries_generator.insert_patients(patients)
@@ -24,7 +24,7 @@ def main():
     queries_generator.insert_opts(opts)
     queries_generator.insert_appointments(appointments)
     queries_generator.insert_treatments(treatments)
-    
+
     queries = queries_generator.get_queries()
     with open("queries.sql", "w", encoding="utf8") as queries_file:
         for query in queries:
