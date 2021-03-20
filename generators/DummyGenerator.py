@@ -777,7 +777,6 @@ def generateOPTIPTAppointment(patients, staffs):
                 out_date = s.addDate(in_date, expected_duration + random.randint(0,1))
                 ward_type = random.choice(s.clinics)
                 ipt[pid] = {
-                    "PID":pid,
                     "waitDate":date,
                     "inDate":in_date,
                     "expectedDuration":expected_duration,
@@ -850,7 +849,7 @@ def generateClinics():
     
     return data
 
-def generateWards(n = 10, clinics = {}, staffs = {}):
+def generateWards(clinics, staffs, n=10):
     data = {}
 
     clinics_values = list(clinics.values())
@@ -885,7 +884,7 @@ def generateWards(n = 10, clinics = {}, staffs = {}):
     
     return data
 
-def generateBeds(n = 240, wards = {}):
+def generateBeds(wards, n = 240):
     data = {}
 
     wards_ids = list(wards.keys())
