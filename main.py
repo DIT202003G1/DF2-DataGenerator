@@ -1,3 +1,8 @@
+"""
+TODO:
+    - generate in patient bed
+"""
+
 from generators import DummyGenerator, QueriesGenerator
 from generators.DummyGenerator import generateOPTIPTAppointment,generatePatient,generateStaff
 
