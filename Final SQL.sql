@@ -72,6 +72,7 @@ CREATE TABLE pt_ntk (
 
 CREATE TABLE out_patient (
     pt_id CHAR(8),
+    opt_index INT(4),
     opt_date DATE,
     opt_reason VARCHAR(128),
     opt_clinic CHAR(8),
@@ -85,7 +86,7 @@ CREATE TABLE in_patient (
     ipt_expected_duration INT(5),
     ipt_out_date DATE,
     ipt_bed CHAR(8),
-    PRIMARY KEY (pt_id)
+    PRIMARY KEY (pt_id, ipt_wait_date)
 );
 
 CREATE TABLE patient_appointment (
