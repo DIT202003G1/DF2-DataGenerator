@@ -6,6 +6,9 @@ def format_date(date):
 def format_telephone(telephone):
     return f'"{telephone}"' if telephone else "null"
 
+def format_queries(query_template, values):
+    return query_template.format(",\n    ".join(values))
+
 INSERT_PATIENT_NTK_TEMPLATE = """INSERT INTO pt_ntk VALUES
     {};"""
 
@@ -47,18 +50,22 @@ def insert_patients(patients = {}):
             )
             ntk_index += 1
     
-    queries.append(INSERT_PATIENTS_TEMPLATE.format(",\n    ".join(patients_value_list)))
-    queries.append(INSERT_PATIENT_NTK_TEMPLATE.format(",\n    ".join(patient_ntks_value_list)))
+    queries.append(format_queries(INSERT_PATIENTS_TEMPLATE, patients_value_list))
+    queries.append(format_queries(INSERT_PATIENT_NTK_TEMPLATE, patient_ntks_value_list))
 
 INSERT_STAFFS_TEMPLATE = """INSERT INTO staff VALUES
     {};"""
 
+INSERT_WORKING_EXP_TEMPLATE = """INSERT INTO working_exp VALUES
+    {};"""
+
 def insert_staffs(staffs = {}):
     staffs_value_list = []
+    working_experiences_value_list = []
 
     for id, staff_data in staffs.items():
         staffs_value_list.append(
-            '("{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}", "{}")'.format(
+            '("{}", "{}", "{}", "{}", {}, "{}", "{}", "{}", "{}", "{}", "{}", "{}")'.format(
                 id,
                 staff_data.get("firstName"),
                 staff_data.get("lastName"),
@@ -73,8 +80,25 @@ def insert_staffs(staffs = {}):
                 "SF000000"
             )
         )
+
+        for wexp in staff_data.get("wexp"):
+            org = wexp[0]
+            pos = wexp[1]
+            start = wexp[2]
+            duration = wexp[3]
+
+            working_experiences_value_list.append(
+                '("{}", "{}", "{}", "{}", "{}")'.format(
+                    id,
+                    format_date(start),
+                    org,
+                    pos,
+                    duration
+                )
+            )
     
-    queries.append(INSERT_STAFFS_TEMPLATE.format(",\n    ".join(staffs_value_list)))
+    queries.append(format_queries(INSERT_STAFFS_TEMPLATE, staffs_value_list))
+    queries.append(format_queries(INSERT_WORKING_EXP_TEMPLATE, working_experiences_value_list))
 
 def get_queries():
     return queries
