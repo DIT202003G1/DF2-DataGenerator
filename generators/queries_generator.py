@@ -347,6 +347,27 @@ def insert_clinics(clinics):
 
 
 
+INSERT_WARDS_TEMPLATE = """INSERT INTO ward VALUES
+    {};"""
+
+def insert_wards(wards):
+    wards_value_list = []
+
+    for ward_id, ward_data in wards.items():
+        wards_value_list.append(
+            '("{}", "{}", "{}", "{}", "{}")'.format(
+                ward_id,
+                ward_data["ext"],
+                ward_data["name"],
+                ward_data["location"],
+                ward_data["nurse"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_WARDS_TEMPLATE, wards_value_list))
+
+
+
 INSERT_TREATMENTS_TEMPLATE = """INSERT INTO patient_treatment VALUES
     {};"""
 
