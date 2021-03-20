@@ -177,6 +177,16 @@ INSERT_LONG_TERM_STAFFS_TEMPLATE = """INSERT INTO staff_long_term VALUES
 INSERT_CERT_STAFFS_TEMPLATE = """INSERT INTO cert_staff VALUES
     {};"""
 
+def seperate_value_list(value_list):
+    first_value_list = []
+    second_value_list = []
+    for value in value_list:
+        if "null" in value:
+            first_value_list.append(value)
+        else:
+            second_value_list.append(value)
+    return first_value_list, second_value_list
+
 def insert_staffs(staffs):
     staffs_value_list = []
     working_experiences_value_list = []
@@ -247,8 +257,10 @@ def insert_staffs(staffs):
                 staff_data["qualification_type"]
             )
         )
-
-    queries.append(format_queries(INSERT_STAFFS_TEMPLATE, staffs_value_list))
+    
+    first_staffs_value_list, second_staffs_value_list = seperate_value_list(staffs_value_list)
+    queries.append(format_queries(INSERT_STAFFS_TEMPLATE, first_staffs_value_list))
+    queries.append(format_queries(INSERT_STAFFS_TEMPLATE, second_staffs_value_list))
     queries.append(format_queries(INSERT_WORKING_EXP_TEMPLATE, working_experiences_value_list))
     queries.append(format_queries(INSERT_SHORT_TERM_STAFFS_TEMPLATE, short_term_staffs_value_list))
     queries.append(format_queries(INSERT_LONG_TERM_STAFFS_TEMPLATE, long_term_staffs_value_list))
