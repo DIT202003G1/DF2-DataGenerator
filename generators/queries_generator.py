@@ -91,7 +91,7 @@ def insert_suppliers(suppliers):
 
     for id, supplier_data in suppliers.items():
         suppliers_value_list.append(
-            '({},{},{},{},{})'.format(
+            '("{}", "{}", "{}", "{}", "{}")'.format(
                 id,
                 supplier_data["name"],
                 supplier_data["address"],
@@ -130,7 +130,7 @@ def insert_supplies(suppliers,staffs):
                 )
             )
             equipments_value_list.append(
-                '"{}", "{}", "{}"'.format(
+                '("{}", "{}", "{}")'.format(
                     equipment[0],
                     equipment[1],
                     "First-aid",
@@ -153,7 +153,7 @@ def insert_supplies(suppliers,staffs):
                 )
             )
             drugs_value_list.append(
-                '"{}", "{}", "{}"'.format(
+                '("{}", "{}", "{}")'.format(
                     drug[0],
                     random.choice(["Tablet","Liquid Ingestion","Liquid Injection","Topical"]),
                     drug[2],
