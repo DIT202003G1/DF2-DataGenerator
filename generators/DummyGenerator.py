@@ -724,8 +724,8 @@ def generateStaff(staffmax=100):
     return data
 
 def generateOPTIPTAppointment(patients, staffs):
-    ipt = []
-    opt = []
+    ipt = {}
+    opt = {}
     appointment = {}
     for pid in patients:
         patient = patients[pid]
@@ -745,12 +745,11 @@ def generateOPTIPTAppointment(patients, staffs):
                         continue
                     reason = random.choice(s.clinic_reason[clinic])
                     break
-                opt.append({
-                    "PID":pid,
+                opt[pid] = {
                     "date":date,
                     "reason":reason,
                     "clinic":clinic
-                })
+                }
                 staff_ids = [s for s in staffs]
                 while True:
                     staff_id = random.choice(staff_ids)
@@ -777,13 +776,13 @@ def generateOPTIPTAppointment(patients, staffs):
                 expected_duration = random.randint(7,14)
                 out_date = s.addDate(in_date, expected_duration + random.randint(0,1))
                 ward_type = random.choice(s.clinics)
-                ipt.append({
+                ipt[pid] = {
                     "PID":pid,
                     "waitDate":date,
                     "inDate":in_date,
                     "expectedDuration":expected_duration,
                     "outDate":None if out_date[0] >= 2021 else out_date,
-                })
+                }
                 staff_ids = [s for s in staffs]
                 while True:
                     staff_id = random.choice(staff_ids)
