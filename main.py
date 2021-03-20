@@ -1,6 +1,7 @@
 """
 TODO:
     - generate in patient bed
+    - generate patient appointment id
 """
 
 from generators import DummyGenerator, QueriesGenerator
