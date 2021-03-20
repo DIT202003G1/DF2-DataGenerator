@@ -301,11 +301,97 @@ class CommonSources:
 		"Universiti Islam Antarabangsa Sultan Abdul Halim Mu’adzam Shah",
 	]
 	drugs = [
-		["DRG00001","a",20],
-		["DRG00002","b",25],
-		["DRG00003","c",30],
-		["DRG00004","d",35],
-		["DRG00005","e",40]
+		["DRG00001","Atorvastatin",30],
+		["DRG00002","Levothyroxine",35],
+		["DRG00003","Lisinopril",20],
+		["DRG00004","Metformin",34],
+		["DRG00005","Amlodipine",32],
+		["DRG00006","Metoprolol",35],
+		["DRG00007","Albuterol",31],
+		["DRG00008","Omeprazole",32],
+		["DRG00009","Losartan",23],
+		["DRG00010","Simvastatin",43],
+		["DRG00011","Gabapentin",23],
+		["DRG00012","Hydrochlorothiazide",28],
+		["DRG00013","Sertraline",15],
+		["DRG00014","Montelukast",18],
+		["DRG00015","Fluticasone",38],
+		["DRG00016","Amoxicillin",30],
+		["DRG00017","Furosemide",35],
+		["DRG00018","Pantoprazole",20],
+		["DRG00019","Prednisone",34],
+		["DRG00020","Escitalopram",32],
+		["DRG00021","Fluoxetine",35],
+		["DRG00022","Dextroamphetamine",31],
+		["DRG00023","Insulin Glargine",32],
+		["DRG00024","Bupropion",23],
+		["DRG00025","Ibuprofen",43],
+		["DRG00026","Rosuvastatin",30],
+		["DRG00027","Pravastatin Sodium",35],
+		["DRG00028","Trazodone",20],
+		["DRG00029","Tamsulosin",34],
+		["DRG00030","Carvedilol",32],
+		["DRG00031","Meloxicam",35],
+		["DRG00032","Citalopram",31],
+		["DRG00033","Duloxetine",32],
+		["DRG00034","Alprazolam",23],
+		["DRG00035","Potassium",43],
+		["DRG00036","Clopidogrel",30],
+		["DRG00037","Atenolol",35],
+		["DRG00038","Cyclobenzaprine",20],
+		["DRG00039","Allopurinol",34],
+		["DRG00040","Venlafaxine",32],
+		["DRG00041","Warfarin",35],
+		["DRG00042","Propranolol",31],
+		["DRG00043","Cetirizine",32],
+		["DRG00044","Estradiol",23],
+		["DRG00045","Lorazepam",43],
+		["DRG00046","Quetiapine",24],
+		["DRG00047","Zolpidem Tartrate",43],
+		["DRG00048","Ergocalciferol",52],
+		["DRG00049","Budesonide",20],
+		["DRG00050","Ethinyl Estradiol/Norethindrone",38],
+	]
+	supplies = [
+		["INS00001","Small","Adhesive tape"],
+		["INS00002","Small","Elastic wrap bandages"],
+		["INS00003","Small","Bandage strips and 'butterfly' bandages in assorted sizes"],
+		["INS00004","Small","Super glue"],
+		["INS00005","Small","Rubber tourniquet or 16 French catheter"],
+		["INS00006","Small","Nonstick sterile bandages and roller gauze in assorted sizes"],
+		["INS00007","Small","Eye shield or pad"],
+		["INS00008","Small","Large triangular bandage (may be used as a sling)"],
+		["INS00009","Small","Aluminum finger splint"],
+		["INS00010","Small","Instant cold packs"],
+		["INS00011","Small","Cotton balls and cotton-tipped swabs"],
+		["INS00012","Small","Disposable nonlatex examination gloves, several pairs"],
+		["INS00013","Small","Duct tape"],
+		["INS00014","Small","Petroleum jelly or other lubricant"],
+		["INS00015","Small","Plastic bags, assorted sizes"],
+		["INS00016","Small","Safety pins in assorted sizes"],
+		["INS00017","Small","Scissors and tweezers"],
+		["INS00018","Small","Hand sanitizer"],
+		["INS00019","Small","Antibiotic ointment"],
+		["INS00020","Small","Antiseptic solution and towelettes"],
+		["INS00021","Small","Eyewash solution"],
+		["INS00022","Small","Thermometer"],
+		["INS00023","Small","Turkey baster or other bulb suction device for flushing wounds"],
+		["INS00024","Small","Sterile saline for irrigation, flushing"],
+		["INS00025","Small","Breathing barrier (surgical mask)"],
+		["INS00026","Small","Syringe, medicine cup or spoon"],
+		["INS00027","Small","First-aid manual"],
+		["INS00028","Small","Hydrogen peroxide to disinfect"],
+		["INS00029","Small","Aloe vera gel"],
+		["INS00030","Small","Calamine lotion"],
+		["INS00031","Small","Anti-diarrhea medication"],
+		["INS00032","Small","Laxative"],
+		["INS00033","Small","Antacids"],
+		["INS00034","Small","Antihistamine, such as diphenhydramine"],
+		["INS00035","Small","Hydrocortisone cream"],
+		["INS00036","Small","Cough and cold medications"],
+		["INS00037","Small","Personal medications that don't need refrigeration"],
+		["INS00038","Small","Auto-injector of epinephrine, if prescribed by your doctor"],
+		["INS00039","Small","Pain relievers, such as acetaminophen (Tylenol, others), ibuprofen (Advil, Motrin IB, others)"],
 	]
 	def generateGenderedName(self,gender="",lastName=""):
 		if not gender:
@@ -448,6 +534,25 @@ class CommonSources:
 			random.randint(0,60)
 		]
 		return time
+	def generateSuppliers(self, n=50):
+		data = {}
+		names = []
+		while len(data) <= n:
+			supplierID = self.generateID(prefix="SYR")
+			supplierName = random.choice(self.lastName) + random.choice(["Pharmacy SDN BHD","Medication SDN BHD","Medical Supplies SDN BHD","Medicals SDN BHD","Laboratories SDN BHD","Chemicals SDN BHD"])
+			if supplierName in names:
+				continue
+			names.append(supplierName)
+			supplierAddress = self.generateAddress()
+			supplierTelephone = self.generatePhoneNum()
+			supplierFax = self.generateID(prefix="03",length=10)
+			data[supplierID] = {
+				"name":supplierName,
+				"address":supplierAddress,
+				"telephone":supplierTelephone,
+				"fax":supplierFax,
+			}
+		return data
 
 
 s = CommonSources()
@@ -778,3 +883,30 @@ def generateBeds(n = 240, wards = {}):
 			ward_index = 0
 
 	return data
+
+def generateSupplySuppliers():
+	suppliers = s.generateSuppliers()
+	for i in suppliers:
+		supplier = suppliers[i]
+		supplier["drugs"] = []
+		supplier["equipments"] = []
+	supplier_index = 0
+	drug_index = 0
+	supplier_key = list(suppliers.keys())[supplier_index]	
+	while drug_index < len(s.drugs):
+		suppliers[supplier_key]["drugs"].append(s.drugs[drug_index])
+		supplier_index += 1	
+		drug_index += 1
+		if supplier_index >= len(suppliers):
+			supplier_index = 0
+		supplier_key = list(suppliers.keys())[supplier_index]
+	equipement_index = 0
+	supplier_index = 0
+	supplier_key = list(suppliers.keys())[supplier_index]
+	while equipement_index < len(s.supplies):
+		suppliers[supplier_key]["equipments"].append(s.supplies[equipement_index])
+		equipement_index += 1
+		supplier_index += 1
+		supplier_key = list(suppliers.keys())[supplier_index]
+	return suppliers
+print(generateSupplySuppliers())
