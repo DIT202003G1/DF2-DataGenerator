@@ -554,8 +554,8 @@ class CommonSources:
     def generateTime(self,start_hr=8,end_hr=19):
         time = [
             random.randint(start_hr,end_hr),
-            random.randint(0,60),
-            random.randint(0,60)
+            random.randint(0,59),
+            random.randint(0,59)
         ]
         return time
 
