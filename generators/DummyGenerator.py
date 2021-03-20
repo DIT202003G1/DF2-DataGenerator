@@ -407,6 +407,7 @@ class CommonSources:
         ["INS00038", "Small", "Auto-injector of epinephrine, if prescribed by your doctor"],
         ["INS00039", "Small", "Pain relievers, such as acetaminophen (Tylenol, others), ibuprofen (Advil, Motrin IB, others)"],
     ]
+
     def generateGenderedName(self,gender="",lastName=""):
         if not gender:
             gender = random.choice(["male","female"])
@@ -414,7 +415,7 @@ class CommonSources:
         if not lastName:
             lastName = random.choice(self.lastName)
         return [firstName,lastName, gender]
-        
+
     def generateAddress(self,state="",city=""):
         if not state:
             state = random.choice(self.Addresses["states"])
@@ -439,12 +440,14 @@ class CommonSources:
                 state
             ]
         return ", ".join(sequence)
+
     def generatePhoneNum(self):
         output = "01"
         length = random.randint(8,9)
         for i in range(length):
             output += f"{random.randint(0,9)}"
         return output
+
     def generateDate(self,yearStart=1940, yearStop=2021):
         year = random.randint(yearStart,yearStop)
         month = random.randint(1,12)
@@ -452,6 +455,7 @@ class CommonSources:
             day = random.randint(1,30)
             if not (month == 2 and day > 28):
                 return [year, month, day]
+
     def generateID(self,prefixLength=0,suffixLength=0,prefix="",suffix="",length=8):
         numLength = length
         output = ""
@@ -474,8 +478,10 @@ class CommonSources:
             output += f"{random.randint(0,9)}"
         
         return output + suffix
+
     def generatePrice(self,highest=8000,lowest=3000):
         return f"{random.randint(highest,lowest)}.{random.randint(0,9)}{random.randint(0,9)}"
+
     def generatePositionClinic(self,positionType=None):
         if not positionType:
             positionType = random.choice(["Misc","Nurse","Doctor"])
@@ -484,6 +490,7 @@ class CommonSources:
             return [self.position[positionType][clinic], clinic, positionType]
         else:
             return [random.choice(self.position[positionType]), None, positionType]
+
     def generateWorkingExp(self,staff_start,staff_birth,organization="",position="",start=None,duration=0):
         #if no length
         if staff_start[0] - staff_birth[0] < 27:
@@ -502,6 +509,7 @@ class CommonSources:
             return [organization,position,start,duration]
         else:
             return None
+
     def generateQualifications(self,birthdate,positionType,clinic,position):
         title = random.choice(["BsC of ", "BsC Hons of ", "Master of "])
         institude = random.choice(self.institute)
@@ -513,6 +521,7 @@ class CommonSources:
         else:
             qualification = title + random.choice(["Bio Chemistry", "Medication", clinic])
         return date, institude, qualification
+
     def addDate(self,date,day):
         while True:
             date[2] += day
@@ -541,6 +550,7 @@ class CommonSources:
                     condition3 = (date[2]<=28)
                 if condition1 or condition2 or condition3:
                     return date
+
     def generateTime(self,start_hr=8,end_hr=19):
         time = [
             random.randint(start_hr,end_hr),
@@ -548,6 +558,7 @@ class CommonSources:
             random.randint(0,60)
         ]
         return time
+
     def generateSuppliers(self, n=50):
         data = {}
         names = []
