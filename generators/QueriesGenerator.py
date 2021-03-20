@@ -5,7 +5,9 @@ queries = []
 def get_queries():
     return queries
 
-
+def random_dict_element(d):
+    key = random.choice(list(d.keys()))
+    return key,d[key]
 
 def format_date(date):
     return "-".join(map(str, date))
@@ -79,8 +81,12 @@ def insert_staffs(staffs = {}):
     working_experiences_value_list = []
 
     for id, staff_data in staffs.items():
+        while True:
+            staff_manager, staff_manager_data = random_dict_element(staffs)
+            if staff_manager_data["position"] == "Personnel Officer":
+                break
         staffs_value_list.append(
-            '("{}", "{}", "{}", "{}", {}, "{}", "{}", "{}", "{}", "{}", "{}", "{}")'.format(
+            '("{}", "{}", "{}", "{}", {}, "{}", "{}", "{}", "{}", "{}", "{}", {})'.format(
                 id,
                 staff_data["firstName"],
                 staff_data["lastName"],
@@ -92,7 +98,7 @@ def insert_staffs(staffs = {}):
                 staff_data["position"],
                 staff_data["salary"],
                 staff_data["salaryScale"],
-                "SF000000"
+                f'"{staff_manager}"' if staff_data["position"] != "Personnel Officer" else "null",
             )
         )
 
