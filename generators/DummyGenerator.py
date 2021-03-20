@@ -1,4 +1,5 @@
 import random
+import json
 
 class CommonSources:
 	firstName = {
@@ -700,8 +701,7 @@ def generateStaff(staffmax=100):
 def generateOPTIPTAppointment(patients, staffs):
 	ipt = []
 	opt = []
-	treatment = []
-	appointment = []
+	appointment = {}
 	for pid in patients:
 		patient = patients[pid]
 		date = patient["register"]
@@ -732,13 +732,13 @@ def generateOPTIPTAppointment(patients, staffs):
 					if staffs[staff_id]["positionType"] in ("Doctor","Nurse"):
 						sid = staff_id
 						break
-				appointment.append({
+				appointment[s.generateID(prefix="APM")] = {
 					"PID":pid,
 					"SID":sid,
 					"date":date,
 					"room":s.generateID(prefix="CON"),
 					"time":s.generateTime(),
-				})
+				}
 			else:
 				#inpatient
 				in_date = date
@@ -765,13 +765,13 @@ def generateOPTIPTAppointment(patients, staffs):
 					if staffs[staff_id]["positionType"] in ("Doctor","Nurse"):
 						sid = staff_id
 						break
-				appointment.append({
+				appointment[s.generateID(prefix="APM")] = {
 					"PID":pid,
 					"SID":sid,
 					"date":date,
 					"room":s.generateID(prefix="CON"),
 					"time":s.generateTime(),
-				})
+				}
 				date = out_date
 			if date[0] >= 2021:
 				break
