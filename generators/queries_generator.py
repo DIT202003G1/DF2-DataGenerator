@@ -107,7 +107,7 @@ def insert_supplies(suppliers,staffs):
     equipments_value_list = []
 
     for supplier_id, supplier_data in suppliers.items():
-        for equipment in supplier_data["equipment"]:
+        for equipment in supplier_data["equipments"]:
             """
                sply_id CHAR(8),
                 eqm_size VARCHAR(128),
