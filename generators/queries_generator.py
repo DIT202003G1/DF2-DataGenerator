@@ -332,7 +332,7 @@ def insert_appointments(appointments):
 INSERT_CLINICS_TEMPLATE = """INSERT INTO clinic VALUES
     {};"""
 
-def insert_clinics(clinics = {}):
+def insert_clinics(clinics):
     clinics_value_list = []
 
     for clinic_id, clinic_data in clinics.items():
@@ -344,3 +344,26 @@ def insert_clinics(clinics = {}):
         )
     
     queries.append(format_queries(INSERT_CLINICS_TEMPLATE, clinics_value_list))
+
+
+
+INSERT_TREATMENTS_TEMPLATE = """INSERT INTO patient_treatment VALUES
+    {};"""
+
+def insert_treatments(treatments):
+    treatments_value_list = []
+
+    for treatment_id, treatment_data in treatments.items():
+        treatments_value_list.append(
+            '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
+                treatment_id,
+                treatment_data["unitsPerDay"],
+                format_date(treatment_data["start"]),
+                treatment_data["duration"],
+                treatment_data["drug"],
+                treatment_data["patient"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_TREATMENTS_TEMPLATE, treatments_value_list))
+    

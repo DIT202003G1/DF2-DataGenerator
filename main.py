@@ -13,11 +13,13 @@ def main():
     wards = dummy_generator.generateWards(clinics, staffs)
     beds = dummy_generator.generateBeds(wards)
     ipts, opts, appointments = dummy_generator.generateOPTIPTAppointment(patients, staffs)
+    treatments = dummy_generator.generateTreatmentDrug(ipts, opts)
     queries_generator.insert_ipts(ipts, wards, beds)
     queries_generator.insert_opts(opts)
     queries_generator.insert_appointments(appointments)
+    queries_generator.insert_treatments(treatments)
 
-    print(json.dumps(ipts, indent=4))
+    print(json.dumps(treatments, indent=4))
     queries = queries_generator.get_queries()
     with open("queries.sql", "w", encoding="utf8") as queries_file:
         for query in queries:
