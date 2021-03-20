@@ -187,3 +187,21 @@ def insert_appointments(appointments = {}):
         )
     
     queries.append(format_queries(INSERT_APPOINTMENTS_TEMPLATE, appointments_value_list))
+
+
+
+INSERT_CLINICS_TEMPLATE = """INSERT INTO clinic VALUES
+    {};"""
+
+def insert_clinics(clinics = {}):
+    clinics_value_list = []
+
+    for clinic_id, clinic_data in clinics:
+        clinics_value_list.append(
+            '("{}", "{}")'.format(
+                clinic_id,
+                clinic_data["name"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_CLINICS_TEMPLATE, insert_clinics))
