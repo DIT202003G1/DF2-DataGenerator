@@ -368,6 +368,25 @@ def insert_wards(wards):
 
 
 
+INSERT_BEDS_TEMPLATE = """INSERT INTO bed VALUES
+    {};"""
+
+def insert_beds(beds):
+    beds_value_list = []
+    
+    for bed_id, bed_data in beds.items():
+        beds_value_list.append(
+            '("{}", "{}", "{}")'.format(
+                bed_id,
+                bed_data["type"],
+                bed_data["ward"]
+            )
+        )
+    
+    queries.append(format_queries(INSERT_BEDS_TEMPLATE, beds_value_list))
+
+
+
 INSERT_TREATMENTS_TEMPLATE = """INSERT INTO patient_treatment VALUES
     {};"""
 
