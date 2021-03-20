@@ -119,7 +119,7 @@ def insert_supplies(suppliers,staffs):
                 if staff_director_data["position"] == "Medical Director":
                     break
             supplies_value_list.append(
-                '("{}","{}",{},{},"{}","{}","{}")'.format(
+                '("{}", "{}", {}, {}, "{}", "{}", "{}")'.format(
                     equipment[0],
                     equipment[2],
                     random.randint(100,500),
@@ -130,7 +130,7 @@ def insert_supplies(suppliers,staffs):
                 )
             )
             equipments_value_list.append(
-                "{},{},{}".format(
+                '"{}", "{}", "{}"'.format(
                     equipment[0],
                     equipment[1],
                     "First-aid",
