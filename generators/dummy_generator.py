@@ -723,7 +723,7 @@ def generateStaff(staffmax=100):
             data[sid]["duration"] = duration
     return data
 
-def generateOPTIPTAppointment(patients, staffs):
+def generateOPTIPTAppointment(patients, staffs, clinics):
     ipt = {}
     opt = {}
     appointment = {}
@@ -734,21 +734,22 @@ def generateOPTIPTAppointment(patients, staffs):
             if random.randint(0,1):
                 #outpatient
                 while True:
-                    clinic = random.choice(s.clinics)
-                    if not (clinic in s.clinic_reason):
+                    clinic_id = random.choice(list(clinics.keys()))
+                    clinic_name = clinics[clinic_id]["name"]
+                    if not (clinic_name in s.clinic_reason):
                         continue
-                    if (clinic == "Obstetrics and gynecology") and (patient["gender"] == "male"):
+                    if (clinic_name == "Obstetrics and gynecology") and (patient["gender"] == "male"):
                         continue
-                    if (clinic == "Obstetrics and gynecology") and (patient["marital"] != "Married"):
+                    if (clinic_name == "Obstetrics and gynecology") and (patient["marital"] != "Married"):
                         continue
-                    if (clinic == "Pediatrics") and (patient["birthdate"][0] < 2010):
+                    if (clinic_name == "Pediatrics") and (patient["birthdate"][0] < 2010):
                         continue
-                    reason = random.choice(s.clinic_reason[clinic])
+                    reason = random.choice(s.clinic_reason[clinic_name])
                     break
                 opt[pid] = {
                     "date":date,
                     "reason":reason,
-                    "clinic":clinic
+                    "clinic":clinic_id
                 }
                 staff_ids = [s for s in staffs]
                 while True:
