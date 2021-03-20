@@ -149,7 +149,7 @@ def insert_ipts(ipts = {}, wards = {}, beds = {}):
     ipts_value_list = []
 
     for ipt in ipts:
-        ward_id = random.choice(wards.keys())
+        ward_id = random.choice(list(wards.keys()))
         beds_in_ward = [bed_id for bed_id, bed_data in beds if bed_data["ward"] == ward_id]
         bed_id = random.choice(beds_in_ward)
 
