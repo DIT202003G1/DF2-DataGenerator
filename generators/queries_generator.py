@@ -335,15 +335,16 @@ INSERT_APPOINTMENTS_TEMPLATE = """INSERT INTO patient_appointment VALUES
 def insert_appointments(appointments):
     appointments_value_list = []
 
-    for appointment_id, appointment_date in appointments.items():
+    for appointment_id, appointment_data in appointments.items():
         appointments_value_list.append(
-            '("{}", "{}", "{}", "{}", "{}", "{}")'.format(
+            '("{}", "{}", "{}", "{}", "{}", "{}", "{}")'.format(
                 appointment_id,
-                format_date(appointment_date["date"]),
-                appointment_date["room"],
-                format_time(appointment_date["time"]),
-                appointment_date["PID"],
-                appointment_date["SID"]
+                format_date(appointment_data["date"]),
+                appointment_data["room"],
+                format_time(appointment_data["time"]),
+                appointment_data["PID"],
+                appointment_data["SID"],
+                appointment_data["reason"]
             )
         )
     

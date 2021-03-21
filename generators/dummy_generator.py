@@ -760,6 +760,7 @@ def generateOPTIPTAppointment(patients, staffs, clinics):
                 appointment[s.generateID(prefix="APM")] = {
                     "PID":pid,
                     "SID":sid,
+                    "reason":reason,
                     "date":date,
                     "room":s.generateID(prefix="CON"),
                     "time":s.generateTime(),
@@ -781,6 +782,7 @@ def generateOPTIPTAppointment(patients, staffs, clinics):
                 else:
                     out_date = [2021,1,1]
                 ward_type = random.choice(s.clinics)
+                reason = random.choice(s.clinic_reason[ward_type])
                 ipt[pid] = {
                     "waitDate":date,
                     "inDate":in_date,
@@ -796,6 +798,7 @@ def generateOPTIPTAppointment(patients, staffs, clinics):
                 appointment[s.generateID(prefix="APM")] = {
                     "PID":pid,
                     "SID":sid,
+                    "reason":reason,
                     "date":date,
                     "room":s.generateID(prefix="CON"),
                     "time":s.generateTime(),
