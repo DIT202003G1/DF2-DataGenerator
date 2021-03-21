@@ -14,10 +14,13 @@ def main():
     beds = dummy_generator.generateBeds(wards)
     ipts, opts, appointments = dummy_generator.generateOPTIPTAppointment(patients, staffs, clinics)
     treatments = dummy_generator.generateTreatmentDrug(ipts, opts)
+    suppliers = dummy_generator.generateSupplySuppliers()
 
     queries_generator.insert_patients(patients)
     queries_generator.insert_staffs(staffs)
     queries_generator.insert_clinics(clinics)
+    queries_generator.insert_suppliers(suppliers)
+    queries_generator.insert_supplies(suppliers,staffs)
     queries_generator.insert_wards(wards)
     queries_generator.insert_beds(beds)
     queries_generator.insert_ipts(ipts, wards, beds)
