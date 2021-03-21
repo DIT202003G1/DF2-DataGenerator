@@ -14,10 +14,7 @@ def format_date(date):
     return "-".join(map(str, date))
 
 def format_nullable_date(date):
-    if date:
-        return f'"{format_date(date)}"'
-    else:
-        return "null"
+    return f'"{format_date(date)}"' if date else "null"
 
 def format_time(time):
     new_time = []
