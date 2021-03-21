@@ -15,7 +15,7 @@ def format_date(date):
 
 def format_nullable_date(date):
     if date:
-        return format_date(date)
+        return f'"{format_date(date)}"'
     else:
         return "null"
 

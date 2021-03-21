@@ -814,7 +814,10 @@ def generateTreatmentDrug(ipts, opts):
         ptr_unit = random.randint(1,6)
         ptr_drug, _, _ = random.choice(s.drugs)
         for j in range(3):
-            ptr_start_date = ipt_data["inDate"]
+            if ipt_data["inDate"]:
+                ptr_start_date = ipt_data["inDate"]
+            else:
+                ptr_start_date = ipt_data["waitDate"]
             ptr_duration = ipt_data["expectedDuration"]
             if j == 0:
                 data[ptr_id] = {
