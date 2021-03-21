@@ -1,3 +1,5 @@
+DROP DATABASE SunwayGCH;
+
 CREATE DATABASE SunwayGCH;
 
 USE SunwayGCH;
@@ -84,6 +86,7 @@ CREATE TABLE in_patient (
     ipt_wait_date DATE,
     ipt_in_date DATE,
     ipt_expected_duration INT(5),
+    ipt_expected_ward CHAR(8),
     ipt_out_date DATE,
     ipt_bed CHAR(8),
     PRIMARY KEY (pt_id, ipt_wait_date)
@@ -96,6 +99,7 @@ CREATE TABLE patient_appointment (
     pa_time TIME,
     pa_patient CHAR(8),
     pa_consultant CHAR(8),
+    pa_reason VARCHAR(8),
     PRIMARY KEY (pa_id)
 );
 
