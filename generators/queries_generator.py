@@ -13,6 +13,12 @@ def random_dict_element(d):
 def format_date(date):
     return "-".join(map(str, date))
 
+def format_nullable_date(date):
+    if date:
+        return format_date(date)
+    else:
+        return "null"
+
 def format_time(time):
     new_time = []
     for i in map(str, time):
@@ -306,15 +312,19 @@ def insert_ipts(ipts, wards, beds):
         ward_id = random.choice(list(wards.keys()))
         beds_in_ward = [bed_id for bed_id, bed_data in beds.items() if bed_data["ward"] == ward_id]
         bed_id = random.choice(beds_in_ward)
-
+        if ipt_data["inDate"]:
+            expected_ward = beds[bed_id]["ward"]
+        else:
+            expected_ward, _ = random_dict_element(wards)
         ipts_value_list.append(
-            '("{}", "{}", "{}", "{}", {}, "{}")'.format(
+            '("{}", "{}", {}, {}, "{}", {}, {})'.format(
                 ipt_id,
                 format_date(ipt_data["waitDate"]),
-                format_date(ipt_data["inDate"]),
+                format_nullable_date(ipt_data["inDate"]),
                 ipt_data["expectedDuration"],
-                f'"{format_date(ipt_data["outDate"])}"' if ipt_data["outDate"] else "null",
-                bed_id
+                expected_ward,
+                format_nullable_date(ipt_data["outDate"]),
+                bed_id if ipt_data["inDate"] else "null"
             )
         )
     

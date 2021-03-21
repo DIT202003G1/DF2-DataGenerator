@@ -766,16 +766,20 @@ def generateOPTIPTAppointment(patients, staffs, clinics):
                 }
             else:
                 #inpatient
-                in_date = date
-                in_date[2] += random.randint(0,1)
-                if in_date[2] >= 31:
-                    in_date[2] = 1
-                    in_date[1] += 1
-                if in_date[1] >= 13:
-                    in_date[0] += 1
-                    in_date[1] = 1
+                in_date = date if random.randint(0,1) else None
+                if in_date:
+                    in_date[2] += random.randint(0,1)
+                    if in_date[2] >= 31:
+                        in_date[2] = 1
+                        in_date[1] += 1
+                    if in_date[1] >= 13:
+                        in_date[0] += 1
+                        in_date[1] = 1
                 expected_duration = random.randint(7,14)
-                out_date = s.addDate(in_date, expected_duration + random.randint(0,1))
+                if in_date:
+                    out_date = s.addDate(in_date, expected_duration + random.randint(0,1))
+                else:
+                    out_date = [2021,1,1]
                 ward_type = random.choice(s.clinics)
                 ipt[pid] = {
                     "waitDate":date,
