@@ -99,7 +99,7 @@ CREATE TABLE patient_appointment (
     pa_time TIME,
     pa_patient CHAR(8),
     pa_consultant CHAR(8),
-    pa_reason VARCHAR(8),
+    pa_reason VARCHAR(128),
     PRIMARY KEY (pa_id)
 );
 
