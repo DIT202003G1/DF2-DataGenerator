@@ -324,7 +324,7 @@ def insert_ipts(ipts, wards, beds):
                 ipt_data["expectedDuration"],
                 expected_ward,
                 format_nullable_date(ipt_data["outDate"]),
-                bed_id if ipt_data["inDate"] else "null"
+                f'"{bed_id}"' if ipt_data["inDate"] else "null"
             )
         )
     
